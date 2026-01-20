@@ -1,5 +1,6 @@
 package com.biteNow.v1.controller;
 
+import com.biteNow.v1.service.RestaurantService;
 import com.biteNow.v1.service.UserService;
 
 import java.util.Scanner;
@@ -8,6 +9,7 @@ public class BiteNowV1Main {
 
     private static final Scanner in = new Scanner(System.in);
     private static final UserService userService = new UserService();
+    private static final RestaurantService restaurantService = new RestaurantService();
     private static boolean res = false;
 
 
@@ -50,5 +52,28 @@ public class BiteNowV1Main {
     }
 
     private static void nextProcess() {
+
+        while(true){
+            System.out.println("----BiteNow Application----");
+            System.out.println("1.View All Restaurant!");
+            System.out.println("2.Exit");
+
+            System.out.println("\nEnter your choice: ");
+            int choice = in.nextInt();
+
+            switch (choice){
+                case 1:
+                    restaurantService.viewAllRestaurant();
+                    break;
+                case 2:
+                    System.out.println("----BiteNow Terminated!----");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+                    break;
+            }
+
+        }
     }
 }
