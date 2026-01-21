@@ -1,15 +1,21 @@
 package com.biteNow.v1.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Restaurant {
 
     private int restaurantId;
     private String restaurantName;
     private double rating;
 
-    public Restaurant(int restaurantId, String restaurantName, double rating) {
+    private List<Menu> items;
+
+    public Restaurant(int restaurantId, String restaurantName, double rating,List<Menu> items) {
         this.restaurantId = restaurantId;
         this.restaurantName = restaurantName;
         this.rating = rating;
+        this.items = new ArrayList<>();
     }
 
     public Restaurant() {
@@ -17,6 +23,14 @@ public class Restaurant {
 
     public int getRestaurantId() {
         return restaurantId;
+    }
+
+    public List<Menu> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Menu> items) {
+        this.items = items;
     }
 
     public void setRestaurantId(int restaurantId) {
@@ -45,6 +59,7 @@ public class Restaurant {
                 "restaurantId=" + restaurantId +
                 ", restaurantName='" + restaurantName + '\'' +
                 ", rating=" + rating +
+                ", items=" + items +
                 '}';
     }
 }

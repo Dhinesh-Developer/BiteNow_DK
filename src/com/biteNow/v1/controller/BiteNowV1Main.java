@@ -56,7 +56,10 @@ public class BiteNowV1Main {
         while(true){
             System.out.println("----BiteNow Application----");
             System.out.println("1.View All Restaurant!");
-            System.out.println("2.Exit");
+            System.out.println("2.View Menu");
+            System.out.println("3.Add to Cart");
+            System.out.println("4.View Cart");
+            System.out.println("5.Exit");
 
             System.out.println("\nEnter your choice: ");
             int choice = in.nextInt();
@@ -66,6 +69,21 @@ public class BiteNowV1Main {
                     restaurantService.viewAllRestaurant();
                     break;
                 case 2:
+                    System.out.println("Enter the Restaurant Id: ");
+                    int restaurantId = in.nextInt();
+                    restaurantService.showAllMenu(restaurantId);
+                    break;
+                case 3:
+                    System.out.println("Enter the Restaurant Id: ");
+                    int itemRestaurantId = in.nextInt();
+                    System.out.println("Enter the Item Id: ");
+                    int itemId = in.nextInt();
+                    restaurantService.addToCartByItemId(itemRestaurantId,itemId);
+                    break;
+                case 4:
+                    restaurantService.viewCart();
+                    break;
+                case 5:
                     System.out.println("----BiteNow Terminated!----");
                     System.exit(0);
                     break;
