@@ -59,7 +59,10 @@ public class BiteNowV1Main {
             System.out.println("2.View Menu");
             System.out.println("3.Add to Cart");
             System.out.println("4.View Cart");
-            System.out.println("5.Exit");
+            System.out.println("5.place Order");
+            System.out.println("6.View orders history");
+            System.out.println("7.View Transaction History");
+            System.out.println("8.Exit");
 
             System.out.println("\nEnter your choice: ");
             int choice = in.nextInt();
@@ -84,9 +87,19 @@ public class BiteNowV1Main {
                     restaurantService.viewCart();
                     break;
                 case 5:
+                    restaurantService.placeOrder();
+                    break;
+                case 6:
+                    restaurantService.viewOrderHistory();
+                    break;
+                case 7:
+                    restaurantService.viewTransactionHistory();
+                    break;
+                case 8:
                     System.out.println("----BiteNow Terminated!----");
                     System.exit(0);
                     break;
+
                 default:
                     System.out.println("Invalid choice!");
                     break;

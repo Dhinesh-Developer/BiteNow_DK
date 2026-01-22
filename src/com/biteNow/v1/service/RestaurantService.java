@@ -3,12 +3,14 @@ package com.biteNow.v1.service;
 import com.biteNow.v1.data.MenuData;
 import com.biteNow.v1.data.RestaurantData;
 import com.biteNow.v1.entity.Menu;
+import com.biteNow.v1.entity.Order;
+import com.biteNow.v1.entity.Payment;
 import com.biteNow.v1.entity.Restaurant;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 public class RestaurantService {
 
@@ -18,6 +20,8 @@ public class RestaurantService {
 
     // Data
     List<Menu> addToCart = new ArrayList<>();
+    private List<Order> orderDetails = new ArrayList<>();
+    private List<Payment> paymentsDetails = new ArrayList<>();
 
     // view all available Restaurant
     public void viewAllRestaurant(){
@@ -113,5 +117,73 @@ public class RestaurantService {
         }
         return totalAmount;
     }
+
+    // Orders and Payment
+    public void placeOrder(){
+        if(addToCart.isEmpty()){
+            System.out.println("Cart is empty! cannot place order, Add item to place Order!");
+            return;
+        }else{
+            System.out.println("Cart Details!");
+            Iterator itr = addToCart.iterator();
+            while(itr.hasNext()){
+                System.out.println(itr.next());
+            }
+            System.out.println("Total Amount: "+cartTotalPrice());
+
+            // Orders and payment
+            paymentProcess();
+        }
+
+    }
+
+    // payment process
+    public void paymentProcess(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Payment Details!");
+
+        System.out.println("Enter the Amount: ");
+        double amount = in.nextDouble();
+        in.nextLine();
+        System.out.println("Enter the name: ");
+        String name = in.nextLine();
+        System.out.println("Enter the payment Type: (CASH/UPI): ");
+        String paymentType = in.nextLine();
+
+        Payment payment = new Payment(name,amount,paymentType,"SUCCESS");
+        System.out.println(payment);
+        paymentsDetails.add(payment);
+
+        Order order = new Order(name,cartTotalPrice(),"PLACED",addToCart);
+
+        System.out.println(order);
+        orderDetails.add(order);
+
+    }
+
+    public void viewOrderHistory(){
+        if(orderDetails.isEmpty()){
+            System.out.println("Order history is Empty!");
+        }else{
+            System.out.println("\n Order details!");
+            Iterator itr = orderDetails.iterator();
+            while(itr.hasNext()){
+                System.out.println(itr.next());
+            }
+        }
+    }
+
+    public void viewTransactionHistory(){
+        if(paymentsDetails.isEmpty()){
+            System.out.println("Payment history is Empty!");
+        }else{
+            System.out.println("\n Payment details!");
+            Iterator itr = paymentsDetails.iterator();
+            while(itr.hasNext()){
+                System.out.println(itr.next());
+            }
+        }
+    }
+
 
 }
